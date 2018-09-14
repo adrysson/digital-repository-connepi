@@ -46,7 +46,17 @@ use Cake\Routing\Route\DashedRoute;
  */
 Router::defaultRouteClass(DashedRoute::class);
 
-Router::scope('/api/v1', function ($routes) {
+Router::scope('/api/v1', ['prefix'=>'api/v1'], function ($routes) {
     $routes->setExtensions(['json']);
+    $routes->resources('Areas');
+    $routes->resources('Articles');
+    $routes->resources('Authors');
+    $routes->resources('CategoryOfArticles');
+    $routes->resources('Groups');
+    $routes->resources('Institutions');
+    $routes->resources('Keywords');
+    $routes->resources('Roles');
+    $routes->resources('TypeOfInstitutions');
+    $routes->resources('Users');
     $routes->fallbacks(DashedRoute::class);
 });

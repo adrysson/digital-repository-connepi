@@ -24,8 +24,11 @@ class ArticlesController extends AppController
             'contain' => ['CategoryOfArticles', 'Institutions', 'Areas']
         ];
         $articles = $this->paginate($this->Articles);
-
-        $this->set(compact('articles'));
+        
+        $this->set([
+            'articles'=>$articles,
+            '_serialize'=>['articles']
+        ]);
     }
 
     /**
