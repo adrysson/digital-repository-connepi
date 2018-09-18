@@ -2,7 +2,8 @@
 namespace App\Controller\Api\V1;
 
 use App\Controller\Api\V1\AppController;
-
+use Firebase\JWT\JWT;
+use Cake\Utility\Security;
 /**
  * Users Controller
  *
@@ -13,6 +14,32 @@ use App\Controller\Api\V1\AppController;
 class UsersController extends AppController
 {
 
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['login']);
+    }
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            if ($user = $this->Auth->identify()) {
+                $this->Auth->setUser($user);
+                $data = [
+                    'token' => JWT::encode([
+                        'sub' => $user['id'],
+                        'exp' => time() + 3600 * 24
+                    ], Security::salt())
+                ];
+                $this->set([
+                    'data' => $data,
+                    '_serialize' => ['data']
+                ]);
+            } else{
+                return $this->response->withStatus(422)->withStringBody('Usuário ou senha inválidos');
+            }
+        }
+    }
     /**
      * Index method
      *
@@ -25,7 +52,10 @@ class UsersController extends AppController
         ];
         $users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
+        $this->set([
+            'users'=>$users,
+            '_serialize'=>['users']
+        ]);
     }
 
     /**
@@ -41,7 +71,10 @@ class UsersController extends AppController
             'contain' => ['Groups', 'Roles', 'UsersInstituitions']
         ]);
 
-        $this->set('user', $user);
+        $this->set([
+            'user'=> $user,
+            '_serialize'=>['user']
+        ]);
     }
 
     /**
