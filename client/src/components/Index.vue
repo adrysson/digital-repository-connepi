@@ -1,8 +1,25 @@
 <template>
   <div class="index">
     <v-app light>
-      <v-toolbar class="white">
-        <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-toolbar color="#aa2e25" dark tabs>
+        <v-toolbar-title>RDIA</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn icon title="Página inicial">
+            <v-icon>mdi-login-variant</v-icon>
+          </v-btn>
+          <v-btn icon title="Página inicial">
+            <v-icon>cloud_upload</v-icon>
+          </v-btn>
+        </v-toolbar-items>
+        <v-menu offset-y>
+          <v-icon slot="activator" icon>mdi-dots-vertical</v-icon>
+          <v-list>
+            <v-list-tile v-for="(item, index) in menu" :key="index" @click="">
+              <v-list-tile-title><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </v-toolbar>
       <v-content>
         <section>
@@ -13,177 +30,45 @@
             justify-center
             class="white--text"
             >
-            <img :src="require('@/assets/vuetify.png')" alt="Vuetify.js" height="200">
-            <h1 class="white--text mb-2 display-1 text-xs-center">Parallax Template</h1>
-            <div class="subheading mb-3 text-xs-center">Powered by Vuetify</div>
-            <v-btn
-            class="blue lighten-2 mt-5"
-            dark
-            large
-            href="/pre-made-themes"
-            >
-            Get Started
-          </v-btn>
+            <h1 class="white--text mb-2 display-1 text-xs-center" v-text="project.title"></h1>
+            <div class="subheading mb-3 text-xs-center" v-text="project.subtitle"></div>
+            <v-card>
+              <v-form>
+                <v-card-actions class="pesquisa-termo">
+                  <div class="pesquisa-termo-input">
+                    <v-text-field
+                    label="Informe um termo"
+                    color="red"
+                    required
+                    ></v-text-field>
+                  </div>
+                  <div class="pesquisa-termo-input">
+                    <v-btn
+                    class="red lighten-2"
+                    dark
+                    large
+                    >
+                    Pesquisar
+                  </v-btn>
+                </div>
+              </v-card-actions>
+            </v-form>
+          </v-card>
         </v-layout>
       </v-parallax>
     </section>
-
-    <section>
-      <v-layout
-      column
-      wrap
-      class="my-5"
-      align-center
-      >
-      <v-flex xs12 sm4 class="my-3">
-        <div class="text-xs-center">
-          <h2 class="headline">The best way to start developing</h2>
-          <span class="subheading">
-            Cras facilisis mi vitae nunc
-          </span>
-        </div>
-      </v-flex>
-      <v-flex xs12>
-        <v-container grid-list-xl>
-          <v-layout row wrap align-center>
-            <v-flex xs12 md4>
-              <v-card class="elevation-0 transparent">
-                <v-card-text class="text-xs-center">
-                  <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon>
-                </v-card-text>
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline text-xs-center">Material Design</div>
-                </v-card-title>
-                <v-card-text>
-                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                  Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-                </v-card-text>
-              </v-card>
-            </v-flex>
-            <v-flex xs12 md4>
-              <v-card class="elevation-0 transparent">
-                <v-card-text class="text-xs-center">
-                  <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon>
-                </v-card-text>
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Fast development</div>
-                </v-card-title>
-                <v-card-text>
-                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                  Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-                </v-card-text>
-              </v-card>
-            </v-flex>
-            <v-flex xs12 md4>
-              <v-card class="elevation-0 transparent">
-                <v-card-text class="text-xs-center">
-                  <v-icon x-large class="blue--text text--lighten-2">build</v-icon>
-                </v-card-text>
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline text-xs-center">Completely Open Sourced</div>
-                </v-card-title>
-                <v-card-text>
-                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                  Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-                </v-card-text>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-flex>
-    </v-layout>
-  </section>
-
-  <section>
-    <v-parallax :src="require('@/assets/section.jpg')" height="380">
-      <v-layout column align-center justify-center>
-        <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
-        <em>Kick-start your application today</em>
-        <v-btn
-        class="blue lighten-2 mt-5"
-        dark
-        large
-        href="/pre-made-themes"
-        >
-        Get Started
-      </v-btn>
-    </v-layout>
-  </v-parallax>
-</section>
-
-<section>
-  <v-container grid-list-xl>
-    <v-layout row wrap justify-center class="my-5">
-      <v-flex xs12 sm4>
-        <v-card class="elevation-0 transparent">
-          <v-card-title primary-title class="layout justify-center">
-            <div class="headline">Company info</div>
-          </v-card-title>
-          <v-card-text>
-            Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-            Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 sm4 offset-sm1>
-        <v-card class="elevation-0 transparent">
-          <v-card-title primary-title class="layout justify-center">
-            <div class="headline">Contact us</div>
-          </v-card-title>
-          <v-card-text>
-            Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-          </v-card-text>
-          <v-list class="transparent">
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon class="blue--text text--lighten-2">phone</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>777-867-5309</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon class="blue--text text--lighten-2">place</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Chicago, US</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon class="blue--text text--lighten-2">email</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>john@vuetifyjs.com</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
-</section>
-
-<v-footer class="blue darken-2">
-  <v-layout row wrap align-center>
-    <v-flex xs12>
-      <div class="white--text ml-3">
-        Made with
-        <v-icon class="red--text">favorite</v-icon>
-        by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a>
-        and <a class="white--text" href="https://github.com/vwxyzjn">Costa Huang</a>
-      </div>
-    </v-flex>
-  </v-layout>
-</v-footer>
-</v-content>
+    <v-footer class="red darken-2">
+      <v-layout row wrap align-center>
+        <v-flex xs12>
+          <div class="white--text ml-3">
+            {{project.title}}{{project.year}}. Desenvolvido por <a v-for="dev in project.devs" class="white--text" :href="dev.link" target="_blank">{{dev.name}}</a>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-footer>
+  </v-content>
 </v-app>
-  </div>
+</div>
 </template>
 
 <script>
@@ -191,7 +76,24 @@ export default {
   name: 'index',
   data () {
     return {
-      title: 'Welcome to Your Vue.js PWA'
+      project: {
+        title: 'RDIA',
+        subtitle: 'Repositório Digital CONNEPI',
+        year: '\u00A92018',
+        devs: [
+          {
+            name: 'Adrysson',
+            link: 'https://github.com/adrysson'
+          }
+        ]
+      },
+      menu: [
+        { title: 'Página inicial', icon: 'home' },
+        { title: 'Sobre o CONNEPI', icon: 'info' },
+        { title: 'Comunidades e coleções', icon: 'group' },
+        { title: 'Downloads', icon: 'cloud_download' },
+        { title: 'Estatísticas', icon: 'mdi-chart-line' }
+      ]
     }
   }
 }
@@ -199,4 +101,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.pesquisa-termo div.pesquisa-termo-input{
+  padding: 5px
+}
 </style>
