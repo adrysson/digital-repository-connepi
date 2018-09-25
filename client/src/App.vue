@@ -1,14 +1,19 @@
 <template>
   <div id="app">
     <main>
-      <router-view></router-view>
+      <public-layout/>
     </main>
   </div>
 </template>
 
 <script>
+import publicLayout from '@/components/layouts/Public'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    publicLayout
+  }
 }
 </script>
 
